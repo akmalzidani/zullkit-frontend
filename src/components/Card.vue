@@ -1,23 +1,22 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { getImageUrl } from '@/utils/helper';
 
 const props = defineProps({
+  id: Number,
   title: String,
   subtitle: String,
   image: String,
 });
 
-function getImageUrl() {
-  // This path must be correct for your file
-  return new URL(`../assets/img/${props.image}`, import.meta.url)
-}
+
 </script>
 
 <template>
     <div class="overflow-hidden border border-gray-200 rounded-xl">
-      <RouterLink to="/">
+      <RouterLink :to="`/product/${id}`">
         <div class="m-4 overflow-hidden rounded-xl">
-          <img :alt="title" class="block w-full h-auto" :src=getImageUrl() />
+          <img :alt="title" class="block w-full h-auto" :src=getImageUrl(image) />
         </div>
       </RouterLink>
 

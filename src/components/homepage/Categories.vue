@@ -5,8 +5,7 @@
         Top Categories
       </h2>
       <div class="flex flex-wrap -mx-1 lg:-mx-4">
-        <CategoriesCard v-for="category in categories" :key="category.id" :title="category.title"
-          :item=category.items :image="category.image" />
+        <CategoriesCard v-for="category in categories" :key="category.id" v-bind="category" />
       </div>
     </div>
   </div>
