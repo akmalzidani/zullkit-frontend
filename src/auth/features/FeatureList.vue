@@ -1,13 +1,12 @@
 
 <script setup>
-import { ref } from 'vue';
 import IconBadge from '@/components/icons/IconBadge.vue';
 import IconLayer from '@/components/icons/IconLayer.vue';
 import IconBook from '@/components/icons/IconBook.vue';
 
 import Feature from '@/auth/features/Feature.vue';
 
-const features = ref([
+const features = [
   {
     icon: IconLayer,
     title: 'Customizable',
@@ -23,7 +22,7 @@ const features = ref([
     title: 'Documentation',
     description: 'Accelerate your work with our millions of ready-to-use design projects.',
   },
-]);
+];
 </script>
 
 <template>

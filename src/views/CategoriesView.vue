@@ -1,5 +1,10 @@
+<script setup>
+import Categories from '@/components/categories/Categories.vue';
+
+</script>
+
 <template>
   <div>
-    ini kategori page
+    <Categories />
   </div>
 </template>

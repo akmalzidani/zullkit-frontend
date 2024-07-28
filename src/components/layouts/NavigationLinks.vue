@@ -11,7 +11,7 @@ const links = ref([
 </script>
 
 <template>
-  <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
+  <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 lg:order-0" id="mobile-menu-2">
     <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-regular">
       <li v-for="link in links" :key="link.name">
         <RouterLink :to="link.to"
@@ -20,7 +20,6 @@ const links = ref([
           aria-current="page">{{ link.name }}</RouterLink>
       </li>
     </ul>
-
   </div>
 </template>
 

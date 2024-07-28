@@ -1,13 +1,13 @@
 <script setup>
-import Hero from "@/components/homepage/Hero.vue";
-import Categories from "@/components/homepage/Categories.vue";
-import NewItems from "@/components/homepage/Items.vue";
+import Hero from "@/components/homepage/HeroSection.vue";
+import CategoriesSection from "@/components/homepage/CategoriesSection.vue";
+import NewItems from "@/components/homepage/ItemsSection.vue";
 </script>
 
 <template>
   <main>
     <Hero />
-    <Categories />
+    <CategoriesSection />
     <NewItems />
   </main>
 </template>
