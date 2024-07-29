@@ -3,11 +3,17 @@ import Logo from './Logo.vue';
 import NavigationLinks from './NavigationLinks.vue';
 import AuthButton from './AuthButton.vue';
 import UserInfo from './UserInfo.vue';
-import { ref } from 'vue';
+import { onMounted, computed } from 'vue';
+import { useUserStore } from '@/stores/user';
 
-const isLoggedIn = ref(false);
+const store = useUserStore();
+const user = computed(() => store.getUser);
+const isLoggedIn = computed(() => store.isLoggedIn);
+
+onMounted(() => {
+  store.getUserData();
+});
 </script>
-
 
 <template>
   <div>
@@ -15,8 +21,8 @@ const isLoggedIn = ref(false);
       <div class="container flex flex-wrap items-center justify-between mx-auto my-2">
         <Logo />
         <NavigationLinks />
-        <UserInfo v-if="isLoggedIn" />
-        <AuthButton />
+        <UserInfo v-if="isLoggedIn" :user="user"/>
+        <AuthButton v-else />
       </div>
     </nav>
   </div>

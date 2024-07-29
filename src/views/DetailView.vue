@@ -1,13 +1,19 @@
 <script setup>
 import Gallery from '@/components/detailpage/Gallery.vue';
 import useProducts from '@/composables/useProducts';
-import { ref, onMounted, watch, computed } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { splitAndTrim } from '@/utils/helper'
+import { useUserStore } from '@/stores/user';
 
 const { product, getProductById } = useProducts();
 
+const store = useUserStore();
+const user = computed(() => store.getUser);
+const isLoggedIn = computed(() => store.isLoggedIn);
+
 onMounted(() => {
+  store.getUserData();
   getProductById();
   window.scrollTo(0, 0);
 });
@@ -20,16 +26,10 @@ const features = computed(() => {
   return product.value.features ? splitAndTrim(product.value.features) : [];
 });
 
-// watch(product, (newProduct) => {
-//   if (newProduct && newProduct.features) {
-//     features.value = splitAndTrim(newProduct.features);
-//   }
-// });
-
-
 </script>
+
 <template>
-  <div class="container p-2 mx-auto my-10 max-w-7xl" v-if="product && product.name">
+  <div class="container p-2 mx-auto my-10 max-w-7xl" v-if="product && product.name && user">
     <div class="flex flex-row flex-wrap py-4">
       <main role="main" class="w-full px-4 pt-1 sm:w-2/3 md:w-2/3">
         <h1 class="mb-2 text-3xl font-bold leading-normal tracking-tight text-gray-900 sm:text-4xl md:text-4xl">
@@ -77,10 +77,18 @@ const features = computed(() => {
                 </li>
               </ul>
             </div>
-            <RouterLink to="/pricing"
-              class="inline-flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-full hover:bg-indigo-700 md:py-2 md:text-md md:px-10 hover:shadow">
-              Download Now
-            </RouterLink>
+            <template v-if="user.subscription.length > 0">
+              <a :href="product.file" target="_blank"
+                class="inline-flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-full hover:bg-indigo-700 md:py-2 md:text-md md:px-10 hover:shadow">
+                Download Now
+              </a>
+            </template>
+            <template v-else>
+              <RouterLink to="/pricing"
+                class="inline-flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-full hover:bg-indigo-700 md:py-2 md:text-md md:px-10 hover:shadow">
+                Subscribe
+              </RouterLink>
+            </template>
           </div>
         </div>
       </aside>

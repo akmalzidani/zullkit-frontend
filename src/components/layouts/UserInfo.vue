@@ -2,24 +2,10 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
-const router = useRouter();
-
 const props = defineProps({
   user: Object,
 });
 
-const show = ref(false);
-
-function toggleDropdown() {
-  show.value = !show.value;
-}
-
-function logout() {
-  localStorage.clear("access_token");
-  localStorage.clear("token_type");
-
-  router.push("/login");
-}
 </script>
 
 <template>
@@ -46,12 +32,10 @@ function logout() {
     <div
       class="z-50 fixed right-20 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
       id="dropdown"
-      :class="{ hidden: !show }"
     >
+      <!-- :class="{ hidden: !show }" -->
       <div class="px-4 py-3">
-        <span class="block text-sm text-gray-900 dark:text-white">{{
-          user.name
-        }}</span>
+        <span class="block text-sm text-gray-900 dark:text-white">{{ user.name }}</span>
         <span
           class="block text-sm text-gray-500 truncate font-regular dark:text-gray-400"
           >{{ user.email }}</span
