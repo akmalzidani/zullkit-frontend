@@ -29,7 +29,7 @@ const props = defineProps({
     <div class="flex items-center">
       <div class="mr-2 text-sm font-regular">Halo, {{ user.name }}</div>
       <button type="button"
-        class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+        class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown" @click="toggleDropdown">
         <span class="sr-only">Open user menu</span>
         <img class="w-8 h-8 rounded-full" :src="user.profile_photo_url" alt="user photo" />
@@ -37,31 +37,31 @@ const props = defineProps({
     </div>
 
     <div
-      class="z-50 fixed right-20 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+      class="z-50 fixed right-20 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow"
       id="dropdown" :class="{ hidden: !show }">
       <div class="px-4 py-3">
-        <span class="block text-sm text-gray-900 dark:text-white">{{ user.name }}</span>
-        <span class="block text-sm text-gray-500 truncate font-regular dark:text-gray-400">{{ user.email }}</span>
+        <span class="block text-sm text-gray-900 ">{{ user.name }}</span>
+        <span class="block text-sm text-gray-500 truncate font-regular">{{ user.email }}</span>
       </div>
       <ul class="py-1" aria-labelledby="dropdown">
         <li>
           <a href="#"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Subscriptions</a>
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Subscriptions</a>
         </li>
         <li>
           <a href="#"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Settings</a>
         </li>
         <li>
           <a href="" @click="logout"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
             out</a>
         </li>
       </ul>
     </div>
     <button
       type="button"
-      class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
       aria-controls="mobile-menu-2"
       aria-expanded="false"
       @click="toggleMobileMenu"
@@ -97,13 +97,13 @@ const props = defineProps({
     <div
       id="mobile-menu-2"
       :class="{ hidden: !isMobileMenuOpen }"
-      class="fixed top-16 right-0 w-full bg-white dark:bg-gray-800 shadow-lg md:hidden"
+      class="fixed top-16 right-0 w-full bg-white  shadow-lg md:hidden"
     >
       <ul class="flex flex-col p-4 space-y-4">
         <li v-for="link in links" :key="link.name">
           <RouterLink
             :to="link.to"
-            class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+            class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50  "
             aria-current="page"
           >
             {{ link.name }}
