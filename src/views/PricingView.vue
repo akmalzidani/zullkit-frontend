@@ -1,9 +1,8 @@
 <script setup>
 import FeatureList from '@/auth/features/FeatureList.vue';
 import PriceCard from '@/components/PriceCard.vue';
-import { ref } from 'vue';
 
-const priceList = ref([
+const priceList = [
   {
     id: 1,
     price: 2000,
@@ -36,7 +35,7 @@ const priceList = ref([
     ],
     buttonColor: 'bg-indigo-600 hover:bg-indigo-700 text-white',
   },
-]);
+];
 </script>
 
 <template>

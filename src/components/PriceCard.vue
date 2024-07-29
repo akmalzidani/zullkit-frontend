@@ -1,6 +1,8 @@
 <script setup>
 import { numberFormat } from '@/utils/helper';
-import { RouterLink } from 'vue-router';
+import useCheckout from '@/composables/useCheckout';
+
+const { checkout } = useCheckout();
 
 const props = defineProps({
   price: Number,
@@ -26,11 +28,11 @@ const props = defineProps({
           {{ feature }}
         </li>
       </ul>
-      <RouterLink to="/success"
+      <button @click="checkout(price)"
         class="inline-flex items-center justify-center w-full px-8 py-3 text-base font-medium text-black border border-transparent rounded-full md:py-2 md:text-md md:px-10 hover:shadow"
         :class="buttonColor">
         Checkout Now
-      </RouterLink>
+      </button>
     </div>
   </div>
 </template>
