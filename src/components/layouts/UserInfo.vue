@@ -1,6 +1,22 @@
 <script setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+
+const show = ref(false);
+const isMobileMenuOpen = ref(false);
+const links = [
+  { name: 'Home', to: '/' },
+  { name: 'Categories', to: '/categories' },
+  { name: 'Pricing', to: '/pricing' },
+  { name: 'Study Case', to: '/study-case' },
+];
+
+const toggleMobileMenu = function () {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+}
+
+const toggleDropdown = function () {
+  show.value = !show.value;
+}
 
 const props = defineProps({
   user: Object,
@@ -9,69 +25,46 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="md:order-2">
+  <div class="md:order-2 flex flex-wrap">
     <div class="flex items-center">
       <div class="mr-2 text-sm font-regular">Halo, {{ user.name }}</div>
-      <button
-        type="button"
+      <button type="button"
         class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-        id="user-menu-button"
-        aria-expanded="false"
-        data-dropdown-toggle="dropdown"
-        @click="toggleDropdown"
-      >
+        id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown" @click="toggleDropdown">
         <span class="sr-only">Open user menu</span>
-        <img
-          class="w-8 h-8 rounded-full"
-          :src="user.profile_photo_url"
-          alt="user photo"
-        />
+        <img class="w-8 h-8 rounded-full" :src="user.profile_photo_url" alt="user photo" />
       </button>
     </div>
 
     <div
       class="z-50 fixed right-20 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-      id="dropdown"
-    >
-      <!-- :class="{ hidden: !show }" -->
+      id="dropdown" :class="{ hidden: !show }">
       <div class="px-4 py-3">
         <span class="block text-sm text-gray-900 dark:text-white">{{ user.name }}</span>
-        <span
-          class="block text-sm text-gray-500 truncate font-regular dark:text-gray-400"
-          >{{ user.email }}</span
-        >
+        <span class="block text-sm text-gray-500 truncate font-regular dark:text-gray-400">{{ user.email }}</span>
       </div>
       <ul class="py-1" aria-labelledby="dropdown">
         <li>
-          <a
-            href="#"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-            >Subscriptions</a
-          >
+          <a href="#"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Subscriptions</a>
         </li>
         <li>
-          <a
-            href="#"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-            >Settings</a
-          >
+          <a href="#"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
         </li>
         <li>
-          <a
-            href=""
-            @click="logout"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-            >Sign out</a
-          >
+          <a href="" @click="logout"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+            out</a>
         </li>
       </ul>
     </div>
     <button
-      data-collapse-toggle="mobile-menu-2"
       type="button"
       class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       aria-controls="mobile-menu-2"
       aria-expanded="false"
+      @click="toggleMobileMenu"
     >
       <span class="sr-only">Open main menu</span>
       <svg
@@ -99,5 +92,24 @@ const props = defineProps({
         />
       </svg>
     </button>
+
+    <!-- Menu Mobile -->
+    <div
+      id="mobile-menu-2"
+      :class="{ hidden: !isMobileMenuOpen }"
+      class="fixed top-16 right-0 w-full bg-white dark:bg-gray-800 shadow-lg md:hidden"
+    >
+      <ul class="flex flex-col p-4 space-y-4">
+        <li v-for="link in links" :key="link.name">
+          <RouterLink
+            :to="link.to"
+            class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+            aria-current="page"
+          >
+            {{ link.name }}
+          </RouterLink>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>

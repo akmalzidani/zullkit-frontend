@@ -1,13 +1,10 @@
 <script setup>
-import { ref } from 'vue';
-
-
-const links = ref([
+const links = [
   { name: 'Home', to: '/' },
   { name: 'Categories', to: '/categories' },
   { name: 'Pricing', to: '/pricing' },
   { name: 'Study Case', to: '/study-case' },
-]);
+];
 </script>
 
 <template>
