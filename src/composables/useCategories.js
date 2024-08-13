@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
+import { config } from "@/utils/config";
 
 export default function useCategories() {
   const categories = ref([]);
@@ -14,7 +15,7 @@ export default function useCategories() {
         params.append('limit', limit.value);
       }
 
-      const response = await axios.get(`http://127.0.0.1:8000/api/categories?${params.toString()}`);
+      const response = await axios.get(`${config.baseURL}/categories?${params.toString()}`);
       categories.value = response.data.data.data;
     } catch (error) {
       console.error(error);
@@ -31,7 +32,7 @@ export default function useCategories() {
 
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/categories?${params.toString()}`
+        `${config.baseURL}/categories?${params.toString()}`
       );
       category.value = response.data.data;
     } catch (error) {

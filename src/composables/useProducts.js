@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
+import { config } from "@/utils/config";
 
 export default function useProducts() {
   const products = ref([]);
@@ -15,7 +16,7 @@ export default function useProducts() {
       }
 
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/products?${params.toString()}`
+        `${config.baseURL}/products?${params.toString()}`
       );
       products.value = response.data.data.data;
     } catch (error) {
@@ -32,7 +33,7 @@ export default function useProducts() {
       }
 
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/products?${params.toString()}`
+        `${config.baseURL}/products?${params.toString()}`
       );
       product.value = response.data.data;
     } catch (error) {

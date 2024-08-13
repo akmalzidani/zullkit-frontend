@@ -12,7 +12,6 @@ const props = defineProps({
   thumbnails: String,
 });
 
-// console.log(props.id, props.name, props.category.name, props.thumbnails);
 
 </script>
 

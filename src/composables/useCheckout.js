@@ -1,10 +1,11 @@
 import axios from "axios";
+import { config } from "@/utils/config";
 
 export default function useCheckout() {
   const checkout = async (price) => {
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8000/api/checkout`,
+        `${config.baseURL}/checkout`,
         {
           payment_total: price,
           payment_status: "PENDING",

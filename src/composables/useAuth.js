@@ -2,6 +2,7 @@ import axios from "axios";
 import { ref } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router";
+import { config } from "@/utils/config";
 
 export default function useAuth() {
   const form = ref();
@@ -10,7 +11,7 @@ export default function useAuth() {
 
   const login = async () => {
     try {
-      const response = await axios.post(`http://127.0.0.1:8000/api/login`, {
+      const response = await axios.post(`${config.baseURL}/login`, {
         email: form.value.email,
         password: form.value.password,
       });
@@ -25,7 +26,7 @@ export default function useAuth() {
 
   const register = async () => {
     try {
-      const response = await axios.post(`http://127.0.0.1:8000/api/register`, {
+      const response = await axios.post(`${config.baseURL}/register`, {
         name: form.value.name,
         email: form.value.email,
         password: form.value.password,
